@@ -9,7 +9,7 @@
 ![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-2088FF.svg)
 ![DVC](https://img.shields.io/badge/Data_Versioning-DVC-945DD6.svg)
 
-*(Placeholder for an awesome GIF demo showing Grad-CAM scanning a face)*
+![DeepGuard Dashboard Preview](dashboard.png)
 
 ## 📖 Overview
 DeepGuard is an end-to-end production-ready Deep Learning system designed to detect manipulated images and videos (Deepfakes). 
