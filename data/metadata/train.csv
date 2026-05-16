@@ -1,0 +1,5 @@
+filepath,label
+# Add your data here after running: python scripts/preprocess.py
+# Format:
+# data/processed/real/frame_000001.jpg,0
+# data/processed/fake/frame_000001.jpg,1

@@ -1,0 +1,975 @@
+{
+  "device": "cpu",
+  "torch_threads": 8,
+  "image_size": 224,
+  "batch_size": 4,
+  "max_frames": 32,
+  "chunk_size": 16,
+  "checkpoint": "models/checkpoints/best_model.pth",
+  "model_metadata": {
+    "backbone": "efficientnet_b4",
+    "checkpoint_path": "models\\checkpoints\\best_model.pth",
+    "config": {
+      "backbone": "efficientnet_b4",
+      "num_classes": 1,
+      "dropout_rate": 0.4,
+      "pretrained": true,
+      "image_size": 224,
+      "threshold": 0.68,
+      "seed": 42,
+      "num_epochs": 30,
+      "warmup_epochs": 5,
+      "batch_size": 32,
+      "learning_rate": 5e-05,
+      "weight_decay": 1e-05,
+      "min_lr": 1e-07,
+      "grad_clip": 1.0,
+      "early_stopping_patience": 8,
+      "save_every": 5,
+      "data_root": "/kaggle/input/datasets/manjilkarki/deepfake-and-real-images/Dataset",
+      "train_csv": "data/metadata/train.csv",
+      "val_csv": "data/metadata/val.csv",
+      "test_csv": "data/metadata/test.csv",
+      "num_workers": 4,
+      "n_frames": 16,
+      "augment_level": "medium",
+      "jpeg_quality_lower": 60,
+      "jpeg_quality_upper": 100,
+      "coarse_dropout_holes": 8,
+      "coarse_dropout_size": 32,
+      "use_weighted_sampler": true,
+      "loss_type": "focal",
+      "focal_alpha": 0.25,
+      "focal_gamma": 2.0,
+      "pos_weight": 1.0,
+      "checkpoint_path": "models/checkpoints/best_model.pth",
+      "video_aggregation": "mean",
+      "inference_tta": true,
+      "threshold_config_path": "configs/thresholds.yaml",
+      "mlflow_tracking_uri": "http://localhost:5000",
+      "mlflow_experiment_name": "deepguard-efficientnet-b4",
+      "api_host": "0.0.0.0",
+      "api_port": 8000,
+      "max_upload_size_mb": 100,
+      "device": "auto"
+    }
+  },
+  "image_count": 9,
+  "video_count": 0,
+  "resources": {
+    "peak_cpu_percent": 100.0,
+    "mean_cpu_percent": 84.48155339805825,
+    "peak_ram_percent": 94.4,
+    "peak_process_rss_mb": 1193.1796875
+  },
+  "resource_samples": [
+    {
+      "ts": 1778947091.4913943,
+      "cpu_percent": 0.0,
+      "ram_percent": 94.4,
+      "process_rss_mb": 641.66796875
+    },
+    {
+      "ts": 1778947091.8479338,
+      "cpu_percent": 78.7,
+      "ram_percent": 94.2,
+      "process_rss_mb": 654.98828125
+    },
+    {
+      "ts": 1778947092.0994244,
+      "cpu_percent": 62.3,
+      "ram_percent": 92.9,
+      "process_rss_mb": 656.65625
+    },
+    {
+      "ts": 1778947092.3614347,
+      "cpu_percent": 66.9,
+      "ram_percent": 91.4,
+      "process_rss_mb": 661.58203125
+    },
+    {
+      "ts": 1778947092.622597,
+      "cpu_percent": 53.8,
+      "ram_percent": 90.9,
+      "process_rss_mb": 665.3203125
+    },
+    {
+      "ts": 1778947092.8833554,
+      "cpu_percent": 47.8,
+      "ram_percent": 90.2,
+      "process_rss_mb": 665.77734375
+    },
+    {
+      "ts": 1778947093.1448138,
+      "cpu_percent": 35.5,
+      "ram_percent": 89.6,
+      "process_rss_mb": 667.6953125
+    },
+    {
+      "ts": 1778947093.4066668,
+      "cpu_percent": 38.1,
+      "ram_percent": 89.5,
+      "process_rss_mb": 668.4765625
+    },
+    {
+      "ts": 1778947093.7366369,
+      "cpu_percent": 48.8,
+      "ram_percent": 87.8,
+      "process_rss_mb": 669.47265625
+    },
+    {
+      "ts": 1778947093.990859,
+      "cpu_percent": 18.0,
+      "ram_percent": 87.4,
+      "process_rss_mb": 671.22265625
+    },
+    {
+      "ts": 1778947094.252765,
+      "cpu_percent": 26.1,
+      "ram_percent": 87.1,
+      "process_rss_mb": 672.234375
+    },
+    {
+      "ts": 1778947094.6743577,
+      "cpu_percent": 46.6,
+      "ram_percent": 88.9,
+      "process_rss_mb": 814.22265625
+    },
+    {
+      "ts": 1778947095.4147146,
+      "cpu_percent": 37.7,
+      "ram_percent": 89.1,
+      "process_rss_mb": 830.41796875
+    },
+    {
+      "ts": 1778947095.6745327,
+      "cpu_percent": 42.7,
+      "ram_percent": 90.8,
+      "process_rss_mb": 967.45703125
+    },
+    {
+      "ts": 1778947096.0268106,
+      "cpu_percent": 62.6,
+      "ram_percent": 88.5,
+      "process_rss_mb": 855.16015625
+    },
+    {
+      "ts": 1778947096.367345,
+      "cpu_percent": 78.7,
+      "ram_percent": 89.9,
+      "process_rss_mb": 1018.60546875
+    },
+    {
+      "ts": 1778947097.0317194,
+      "cpu_percent": 59.8,
+      "ram_percent": 88.9,
+      "process_rss_mb": 1026.87109375
+    },
+    {
+      "ts": 1778947097.2843256,
+      "cpu_percent": 57.6,
+      "ram_percent": 90.4,
+      "process_rss_mb": 1193.1796875
+    },
+    {
+      "ts": 1778947097.5774302,
+      "cpu_percent": 61.9,
+      "ram_percent": 86.1,
+      "process_rss_mb": 896.30078125
+    },
+    {
+      "ts": 1778947098.5625112,
+      "cpu_percent": 65.8,
+      "ram_percent": 86.0,
+      "process_rss_mb": 1030.203125
+    },
+    {
+      "ts": 1778947098.999314,
+      "cpu_percent": 78.3,
+      "ram_percent": 85.6,
+      "process_rss_mb": 1028.76171875
+    },
+    {
+      "ts": 1778947099.6512086,
+      "cpu_percent": 59.4,
+      "ram_percent": 84.3,
+      "process_rss_mb": 1033.30078125
+    },
+    {
+      "ts": 1778947099.9155896,
+      "cpu_percent": 84.2,
+      "ram_percent": 85.3,
+      "process_rss_mb": 1117.61328125
+    },
+    {
+      "ts": 1778947100.1765168,
+      "cpu_percent": 66.9,
+      "ram_percent": 85.4,
+      "process_rss_mb": 1112.1796875
+    },
+    {
+      "ts": 1778947100.437264,
+      "cpu_percent": 42.7,
+      "ram_percent": 85.5,
+      "process_rss_mb": 1112.48046875
+    },
+    {
+      "ts": 1778947100.7001243,
+      "cpu_percent": 36.9,
+      "ram_percent": 85.5,
+      "process_rss_mb": 1113.0
+    },
+    {
+      "ts": 1778947100.960011,
+      "cpu_percent": 28.3,
+      "ram_percent": 85.4,
+      "process_rss_mb": 1113.74609375
+    },
+    {
+      "ts": 1778947101.2194107,
+      "cpu_percent": 63.8,
+      "ram_percent": 85.7,
+      "process_rss_mb": 1134.6796875
+    },
+    {
+      "ts": 1778947101.4816587,
+      "cpu_percent": 83.3,
+      "ram_percent": 86.3,
+      "process_rss_mb": 1169.47265625
+    },
+    {
+      "ts": 1778947101.7514389,
+      "cpu_percent": 88.8,
+      "ram_percent": 86.4,
+      "process_rss_mb": 1180.1484375
+    },
+    {
+      "ts": 1778947102.0363617,
+      "cpu_percent": 85.6,
+      "ram_percent": 86.5,
+      "process_rss_mb": 1187.28515625
+    },
+    {
+      "ts": 1778947102.3244605,
+      "cpu_percent": 85.9,
+      "ram_percent": 86.6,
+      "process_rss_mb": 1186.109375
+    },
+    {
+      "ts": 1778947102.5920618,
+      "cpu_percent": 75.0,
+      "ram_percent": 86.7,
+      "process_rss_mb": 1187.3515625
+    },
+    {
+      "ts": 1778947102.8851566,
+      "cpu_percent": 84.8,
+      "ram_percent": 86.7,
+      "process_rss_mb": 1180.3125
+    },
+    {
+      "ts": 1778947103.2655263,
+      "cpu_percent": 72.1,
+      "ram_percent": 86.7,
+      "process_rss_mb": 1187.359375
+    },
+    {
+      "ts": 1778947103.526398,
+      "cpu_percent": 77.3,
+      "ram_percent": 86.8,
+      "process_rss_mb": 1187.359375
+    },
+    {
+      "ts": 1778947103.7921169,
+      "cpu_percent": 83.7,
+      "ram_percent": 87.0,
+      "process_rss_mb": 1187.36328125
+    },
+    {
+      "ts": 1778947104.1071026,
+      "cpu_percent": 98.1,
+      "ram_percent": 87.2,
+      "process_rss_mb": 1180.32421875
+    },
+    {
+      "ts": 1778947104.4948351,
+      "cpu_percent": 96.7,
+      "ram_percent": 87.8,
+      "process_rss_mb": 1187.3671875
+    },
+    {
+      "ts": 1778947104.754031,
+      "cpu_percent": 86.3,
+      "ram_percent": 87.9,
+      "process_rss_mb": 1182.8359375
+    },
+    {
+      "ts": 1778947105.0157757,
+      "cpu_percent": 100.0,
+      "ram_percent": 87.9,
+      "process_rss_mb": 1179.20703125
+    },
+    {
+      "ts": 1778947105.2755952,
+      "cpu_percent": 100.0,
+      "ram_percent": 87.5,
+      "process_rss_mb": 1141.03125
+    },
+    {
+      "ts": 1778947105.5366762,
+      "cpu_percent": 100.0,
+      "ram_percent": 87.6,
+      "process_rss_mb": 1147.01171875
+    },
+    {
+      "ts": 1778947105.7981906,
+      "cpu_percent": 100.0,
+      "ram_percent": 87.7,
+      "process_rss_mb": 1145.0390625
+    },
+    {
+      "ts": 1778947106.0581863,
+      "cpu_percent": 100.0,
+      "ram_percent": 87.6,
+      "process_rss_mb": 1149.2734375
+    },
+    {
+      "ts": 1778947106.318925,
+      "cpu_percent": 99.3,
+      "ram_percent": 87.6,
+      "process_rss_mb": 1149.7265625
+    },
+    {
+      "ts": 1778947106.5818944,
+      "cpu_percent": 100.0,
+      "ram_percent": 88.0,
+      "process_rss_mb": 1162.66796875
+    },
+    {
+      "ts": 1778947106.842616,
+      "cpu_percent": 100.0,
+      "ram_percent": 87.2,
+      "process_rss_mb": 1151.99609375
+    },
+    {
+      "ts": 1778947107.1013699,
+      "cpu_percent": 100.0,
+      "ram_percent": 87.6,
+      "process_rss_mb": 1159.25
+    },
+    {
+      "ts": 1778947107.363213,
+      "cpu_percent": 100.0,
+      "ram_percent": 87.7,
+      "process_rss_mb": 1166.61328125
+    },
+    {
+      "ts": 1778947107.6254835,
+      "cpu_percent": 100.0,
+      "ram_percent": 87.8,
+      "process_rss_mb": 1166.91796875
+    },
+    {
+      "ts": 1778947107.8874538,
+      "cpu_percent": 99.2,
+      "ram_percent": 88.0,
+      "process_rss_mb": 1169.1328125
+    },
+    {
+      "ts": 1778947108.148038,
+      "cpu_percent": 100.0,
+      "ram_percent": 88.0,
+      "process_rss_mb": 1173.28125
+    },
+    {
+      "ts": 1778947108.4115803,
+      "cpu_percent": 100.0,
+      "ram_percent": 88.0,
+      "process_rss_mb": 1158.8828125
+    },
+    {
+      "ts": 1778947108.6687355,
+      "cpu_percent": 100.0,
+      "ram_percent": 87.9,
+      "process_rss_mb": 1164.58203125
+    },
+    {
+      "ts": 1778947108.9359298,
+      "cpu_percent": 100.0,
+      "ram_percent": 88.1,
+      "process_rss_mb": 1173.109375
+    },
+    {
+      "ts": 1778947109.2077687,
+      "cpu_percent": 100.0,
+      "ram_percent": 87.9,
+      "process_rss_mb": 1151.9609375
+    },
+    {
+      "ts": 1778947109.470776,
+      "cpu_percent": 100.0,
+      "ram_percent": 87.9,
+      "process_rss_mb": 1155.78125
+    },
+    {
+      "ts": 1778947109.7289534,
+      "cpu_percent": 100.0,
+      "ram_percent": 88.1,
+      "process_rss_mb": 1171.61328125
+    },
+    {
+      "ts": 1778947109.9928293,
+      "cpu_percent": 100.0,
+      "ram_percent": 87.5,
+      "process_rss_mb": 1110.92578125
+    },
+    {
+      "ts": 1778947110.2503192,
+      "cpu_percent": 100.0,
+      "ram_percent": 87.8,
+      "process_rss_mb": 1124.16796875
+    },
+    {
+      "ts": 1778947110.510972,
+      "cpu_percent": 100.0,
+      "ram_percent": 87.5,
+      "process_rss_mb": 1118.7109375
+    },
+    {
+      "ts": 1778947110.8201978,
+      "cpu_percent": 98.8,
+      "ram_percent": 81.4,
+      "process_rss_mb": 626.3515625
+    },
+    {
+      "ts": 1778947111.0791976,
+      "cpu_percent": 94.3,
+      "ram_percent": 81.5,
+      "process_rss_mb": 635.328125
+    },
+    {
+      "ts": 1778947111.3390098,
+      "cpu_percent": 98.5,
+      "ram_percent": 81.6,
+      "process_rss_mb": 643.5234375
+    },
+    {
+      "ts": 1778947111.5988557,
+      "cpu_percent": 100.0,
+      "ram_percent": 81.9,
+      "process_rss_mb": 665.421875
+    },
+    {
+      "ts": 1778947111.860008,
+      "cpu_percent": 99.3,
+      "ram_percent": 82.0,
+      "process_rss_mb": 677.20703125
+    },
+    {
+      "ts": 1778947112.1209404,
+      "cpu_percent": 100.0,
+      "ram_percent": 81.9,
+      "process_rss_mb": 670.65234375
+    },
+    {
+      "ts": 1778947112.3827465,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.0,
+      "process_rss_mb": 677.3671875
+    },
+    {
+      "ts": 1778947112.6443446,
+      "cpu_percent": 100.0,
+      "ram_percent": 81.9,
+      "process_rss_mb": 668.609375
+    },
+    {
+      "ts": 1778947112.9028063,
+      "cpu_percent": 99.2,
+      "ram_percent": 82.0,
+      "process_rss_mb": 680.39453125
+    },
+    {
+      "ts": 1778947113.1631668,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.0,
+      "process_rss_mb": 676.265625
+    },
+    {
+      "ts": 1778947113.4231384,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.1,
+      "process_rss_mb": 677.75
+    },
+    {
+      "ts": 1778947113.6867695,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.2,
+      "process_rss_mb": 688.5859375
+    },
+    {
+      "ts": 1778947113.9453993,
+      "cpu_percent": 100.0,
+      "ram_percent": 81.9,
+      "process_rss_mb": 654.57421875
+    },
+    {
+      "ts": 1778947114.208121,
+      "cpu_percent": 100.0,
+      "ram_percent": 81.7,
+      "process_rss_mb": 649.29296875
+    },
+    {
+      "ts": 1778947114.4676993,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.0,
+      "process_rss_mb": 666.13671875
+    },
+    {
+      "ts": 1778947114.726758,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.2,
+      "process_rss_mb": 678.4375
+    },
+    {
+      "ts": 1778947114.989054,
+      "cpu_percent": 100.0,
+      "ram_percent": 81.8,
+      "process_rss_mb": 669.9765625
+    },
+    {
+      "ts": 1778947115.254442,
+      "cpu_percent": 100.0,
+      "ram_percent": 81.9,
+      "process_rss_mb": 670.65625
+    },
+    {
+      "ts": 1778947115.5110486,
+      "cpu_percent": 99.2,
+      "ram_percent": 81.8,
+      "process_rss_mb": 668.98828125
+    },
+    {
+      "ts": 1778947115.775451,
+      "cpu_percent": 100.0,
+      "ram_percent": 81.9,
+      "process_rss_mb": 671.046875
+    },
+    {
+      "ts": 1778947116.03233,
+      "cpu_percent": 99.3,
+      "ram_percent": 82.2,
+      "process_rss_mb": 672.78125
+    },
+    {
+      "ts": 1778947116.292589,
+      "cpu_percent": 82.6,
+      "ram_percent": 82.4,
+      "process_rss_mb": 675.5625
+    },
+    {
+      "ts": 1778947116.5542843,
+      "cpu_percent": 65.2,
+      "ram_percent": 82.5,
+      "process_rss_mb": 692.80078125
+    },
+    {
+      "ts": 1778947116.8147476,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.5,
+      "process_rss_mb": 677.8984375
+    },
+    {
+      "ts": 1778947117.0771124,
+      "cpu_percent": 99.2,
+      "ram_percent": 82.4,
+      "process_rss_mb": 679.76953125
+    },
+    {
+      "ts": 1778947117.335922,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.4,
+      "process_rss_mb": 680.9296875
+    },
+    {
+      "ts": 1778947117.5992212,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.5,
+      "process_rss_mb": 687.859375
+    },
+    {
+      "ts": 1778947117.8588462,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.4,
+      "process_rss_mb": 679.1640625
+    },
+    {
+      "ts": 1778947118.1195686,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.6,
+      "process_rss_mb": 683.7578125
+    },
+    {
+      "ts": 1778947118.382087,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.7,
+      "process_rss_mb": 681.8984375
+    },
+    {
+      "ts": 1778947118.6430683,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.6,
+      "process_rss_mb": 666.97265625
+    },
+    {
+      "ts": 1778947118.9045477,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.7,
+      "process_rss_mb": 686.8203125
+    },
+    {
+      "ts": 1778947119.1650937,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.7,
+      "process_rss_mb": 687.35546875
+    },
+    {
+      "ts": 1778947119.4254835,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.8,
+      "process_rss_mb": 691.69140625
+    },
+    {
+      "ts": 1778947119.6873784,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.8,
+      "process_rss_mb": 691.55078125
+    },
+    {
+      "ts": 1778947119.9483395,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.8,
+      "process_rss_mb": 686.8359375
+    },
+    {
+      "ts": 1778947120.20987,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.6,
+      "process_rss_mb": 678.54296875
+    },
+    {
+      "ts": 1778947120.470363,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.9,
+      "process_rss_mb": 683.984375
+    },
+    {
+      "ts": 1778947120.7306156,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.8,
+      "process_rss_mb": 681.63671875
+    },
+    {
+      "ts": 1778947120.9919114,
+      "cpu_percent": 100.0,
+      "ram_percent": 82.9,
+      "process_rss_mb": 691.34765625
+    },
+    {
+      "ts": 1778947121.2526412,
+      "cpu_percent": 100.0,
+      "ram_percent": 83.0,
+      "process_rss_mb": 692.56640625
+    }
+  ],
+  "backends": {
+    "insightface": {
+      "active_backend": "insightface",
+      "images": {
+        "face_detection": {
+          "count": 9,
+          "mean_ms": 546.8113333336078,
+          "p50_ms": 385.3703000022506,
+          "p95_ms": 1633.071899999777,
+          "min_ms": 251.1702999981935,
+          "max_ms": 1633.071899999777
+        },
+        "tta": {
+          "false": {
+            "count": 9,
+            "total_s": 1.8121782999987772,
+            "latency_ms": 201.35314444430858,
+            "throughput_images_per_s": 4.966398725779948,
+            "mean_probability_fake": 0.6609184576405419,
+            "mean_tta_variants": 1.0
+          },
+          "adaptive": {
+            "count": 9,
+            "total_s": 1.8493696999976237,
+            "latency_ms": 205.48552222195818,
+            "throughput_images_per_s": 4.86652290237672,
+            "mean_probability_fake": 0.653862241241667,
+            "mean_tta_variants": 1.1111111111111112
+          },
+          "true": {
+            "count": 9,
+            "total_s": 2.3374151999996684,
+            "latency_ms": 259.7127999999632,
+            "throughput_images_per_s": 3.8504070650354616,
+            "mean_probability_fake": 0.6055825617578294,
+            "mean_tta_variants": 2.0
+          }
+        },
+        "rows": [
+          {
+            "file": "data\\bench\\real\\real_camera.jpg",
+            "label": "real",
+            "face_detection_ms": 1633.071899999777
+          },
+          {
+            "file": "data\\bench\\real\\real_luis_perez.jpg",
+            "label": "real",
+            "face_detection_ms": 523.3254000013403
+          },
+          {
+            "file": "data\\bench\\real\\real_osni.png",
+            "label": "real",
+            "face_detection_ms": 279.6299999972689
+          },
+          {
+            "file": "data\\bench\\real\\real_tomas.jpg",
+            "label": "real",
+            "face_detection_ms": 385.3703000022506
+          },
+          {
+            "file": "data\\bench\\fake\\fake_gan_white_girl.jpg",
+            "label": "fake",
+            "face_detection_ms": 566.4682999995421
+          },
+          {
+            "file": "data\\bench\\fake\\fake_stylegan2_3.jpg",
+            "label": "fake",
+            "face_detection_ms": 251.1702999981935
+          },
+          {
+            "file": "data\\bench\\fake\\fake_tpdne.jpg",
+            "label": "fake",
+            "face_detection_ms": 276.0881000031077
+          },
+          {
+            "file": "data\\bench\\fake\\fake_woman_1.jpg",
+            "label": "fake",
+            "face_detection_ms": 691.6516999990563
+          },
+          {
+            "file": "data\\bench\\fake\\stylegan2_example_3.jpg",
+            "label": "fake",
+            "face_detection_ms": 314.5260000019334
+          }
+        ]
+      },
+      "videos": {
+        "summary": {
+          "count": 0,
+          "mean_ms": 0.0,
+          "p95_ms": 0.0,
+          "total_frames_analyzed": 0,
+          "mean_effective_fps": 0.0
+        },
+        "rows": []
+      }
+    },
+    "mtcnn": {
+      "active_backend": "mtcnn",
+      "images": {
+        "face_detection": {
+          "count": 9,
+          "mean_ms": 54.3401666667099,
+          "p50_ms": 44.44589999911841,
+          "p95_ms": 132.25620000230265,
+          "min_ms": 38.61919999690144,
+          "max_ms": 132.25620000230265
+        },
+        "tta": {
+          "false": {
+            "count": 9,
+            "total_s": 1.074978500000725,
+            "latency_ms": 119.44205555563612,
+            "throughput_images_per_s": 8.372260468459537,
+            "mean_probability_fake": 0.7804730515927076,
+            "mean_tta_variants": 1.0
+          },
+          "adaptive": {
+            "count": 9,
+            "total_s": 1.2631574000006367,
+            "latency_ms": 140.35082222229298,
+            "throughput_images_per_s": 7.125002790622502,
+            "mean_probability_fake": 0.7738597506864203,
+            "mean_tta_variants": 1.1111111111111112
+          },
+          "true": {
+            "count": 9,
+            "total_s": 2.289411599998857,
+            "latency_ms": 254.37906666653967,
+            "throughput_images_per_s": 3.9311410844622667,
+            "mean_probability_fake": 0.7676492726637257,
+            "mean_tta_variants": 2.0
+          }
+        },
+        "rows": [
+          {
+            "file": "data\\bench\\real\\real_camera.jpg",
+            "label": "real",
+            "face_detection_ms": 132.25620000230265
+          },
+          {
+            "file": "data\\bench\\real\\real_luis_perez.jpg",
+            "label": "real",
+            "face_detection_ms": 44.44589999911841
+          },
+          {
+            "file": "data\\bench\\real\\real_osni.png",
+            "label": "real",
+            "face_detection_ms": 40.72520000045188
+          },
+          {
+            "file": "data\\bench\\real\\real_tomas.jpg",
+            "label": "real",
+            "face_detection_ms": 49.81670000051963
+          },
+          {
+            "file": "data\\bench\\fake\\fake_gan_white_girl.jpg",
+            "label": "fake",
+            "face_detection_ms": 42.9175999997824
+          },
+          {
+            "file": "data\\bench\\fake\\fake_stylegan2_3.jpg",
+            "label": "fake",
+            "face_detection_ms": 44.85489999933634
+          },
+          {
+            "file": "data\\bench\\fake\\fake_tpdne.jpg",
+            "label": "fake",
+            "face_detection_ms": 52.20490000283462
+          },
+          {
+            "file": "data\\bench\\fake\\fake_woman_1.jpg",
+            "label": "fake",
+            "face_detection_ms": 43.22089999914169
+          },
+          {
+            "file": "data\\bench\\fake\\stylegan2_example_3.jpg",
+            "label": "fake",
+            "face_detection_ms": 38.61919999690144
+          }
+        ]
+      },
+      "videos": {
+        "summary": {
+          "count": 0,
+          "mean_ms": 0.0,
+          "p95_ms": 0.0,
+          "total_frames_analyzed": 0,
+          "mean_effective_fps": 0.0
+        },
+        "rows": []
+      }
+    },
+    "haar": {
+      "active_backend": "haar",
+      "images": {
+        "face_detection": {
+          "count": 9,
+          "mean_ms": 47.55058888864975,
+          "p50_ms": 22.153999998408835,
+          "p95_ms": 238.72209999899496,
+          "min_ms": 16.54229999985546,
+          "max_ms": 238.72209999899496
+        },
+        "tta": {
+          "false": {
+            "count": 9,
+            "total_s": 1.0599532999985968,
+            "latency_ms": 117.77258888873297,
+            "throughput_images_per_s": 8.49094011973161,
+            "mean_probability_fake": 0.7600982104324632,
+            "mean_tta_variants": 1.0
+          },
+          "adaptive": {
+            "count": 9,
+            "total_s": 1.4548362999994424,
+            "latency_ms": 161.6484777777158,
+            "throughput_images_per_s": 6.186263018047769,
+            "mean_probability_fake": 0.7387874968763855,
+            "mean_tta_variants": 1.1111111111111112
+          },
+          "true": {
+            "count": 9,
+            "total_s": 2.317699999999604,
+            "latency_ms": 257.52222222217824,
+            "throughput_images_per_s": 3.8831600293400945,
+            "mean_probability_fake": 0.711741827842262,
+            "mean_tta_variants": 2.0
+          }
+        },
+        "rows": [
+          {
+            "file": "data\\bench\\real\\real_camera.jpg",
+            "label": "real",
+            "face_detection_ms": 238.72209999899496
+          },
+          {
+            "file": "data\\bench\\real\\real_luis_perez.jpg",
+            "label": "real",
+            "face_detection_ms": 16.54229999985546
+          },
+          {
+            "file": "data\\bench\\real\\real_osni.png",
+            "label": "real",
+            "face_detection_ms": 26.34340000076918
+          },
+          {
+            "file": "data\\bench\\real\\real_tomas.jpg",
+            "label": "real",
+            "face_detection_ms": 42.34640000140644
+          },
+          {
+            "file": "data\\bench\\fake\\fake_gan_white_girl.jpg",
+            "label": "fake",
+            "face_detection_ms": 24.225699999078643
+          },
+          {
+            "file": "data\\bench\\fake\\fake_stylegan2_3.jpg",
+            "label": "fake",
+            "face_detection_ms": 22.153999998408835
+          },
+          {
+            "file": "data\\bench\\fake\\fake_tpdne.jpg",
+            "label": "fake",
+            "face_detection_ms": 20.791700000700075
+          },
+          {
+            "file": "data\\bench\\fake\\fake_woman_1.jpg",
+            "label": "fake",
+            "face_detection_ms": 16.690899999957765
+          },
+          {
+            "file": "data\\bench\\fake\\stylegan2_example_3.jpg",
+            "label": "fake",
+            "face_detection_ms": 20.138799998676404
+          }
+        ]
+      },
+      "videos": {
+        "summary": {
+          "count": 0,
+          "mean_ms": 0.0,
+          "p95_ms": 0.0,
+          "total_frames_analyzed": 0,
+          "mean_effective_fps": 0.0
+        },
+        "rows": []
+      }
+    }
+  }
+}
