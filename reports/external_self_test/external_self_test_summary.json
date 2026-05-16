@@ -1,8 +1,0 @@
-{
-  "mode": "local",
-  "threshold": 0.68,
-  "samples": 8,
-  "completed_predictions": 0,
-  "accuracy": null,
-  "results_csv": "reports\\external_self_test\\external_self_test_results.csv"
-}

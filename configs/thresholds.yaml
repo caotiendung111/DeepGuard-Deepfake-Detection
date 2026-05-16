@@ -1,5 +1,0 @@
-default_threshold: 0.68
-high_recall_threshold: 0.68
-source: conservative_default_until_evaluate_runs
-generated_by: manual_default
-notes: Run scripts/evaluate.py or scripts/optimize_ensemble_threshold.py on a labeled validation set to replace this value.
