@@ -1,0 +1,68 @@
+version: "3.9"
+
+services:
+  # ── DeepGuard API (CPU) ──────────────────────────────────────────────
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    container_name: deepguard-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../models:/app/models
+      - ../data:/app/data
+      - ../logs:/app/logs
+    environment:
+      - MODEL_BACKBONE=efficientnet_b4
+      - MODEL_CHECKPOINT_PATH=models/checkpoints/best_model.pth
+      - DEVICE=cpu
+      - API_PORT=8000
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+    depends_on:
+      - mlflow
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # ── Streamlit Demo UI ────────────────────────────────────────────────────
+  demo:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: deepguard-demo
+    ports:
+      - "8501:8501"
+    volumes:
+      - ../app:/app/app
+      - ../models:/app/models
+    environment:
+      - API_BASE_URL=http://api:8000
+    command: streamlit run app/streamlit_app.py --server.port 8501 --server.address 0.0.0.0
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  # ── MLflow Tracking Server ────────────────────────────────────────────
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.8.0
+    container_name: deepguard-mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - ../mlruns:/mlruns
+      - ../mlartifacts:/mlartifacts
+    command: >
+      mlflow server
+      --host 0.0.0.0
+      --port 5000
+      --backend-store-uri /mlruns
+      --default-artifact-root /mlartifacts
+    restart: unless-stopped
+
+networks:
+  default:
+    name: deepguard-network

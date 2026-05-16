@@ -1,0 +1,32 @@
+# ============================================================
+# DeepGuard — Xception Configuration
+# Optimized hyperparameters for Xception backbone
+# ============================================================
+
+backbone: xception
+image_size: 299              # Xception standard input size
+dropout_rate: 0.5
+
+# Training
+num_epochs: 40               # Xception trains slower
+batch_size: 16               # Smaller batch due to larger input
+learning_rate: 1.0e-4
+weight_decay: 1.0e-4
+min_lr: 1.0e-7
+grad_clip: 5.0               # Higher clip for Xception stability
+early_stopping_patience: 10
+save_every: 5
+
+# Loss
+loss_type: focal
+focal_alpha: 0.25
+focal_gamma: 2.0
+
+# Data
+num_workers: 4
+train_csv: data/metadata/train.csv
+val_csv: data/metadata/val.csv
+test_csv: data/metadata/test.csv
+
+# MLflow
+mlflow_experiment_name: deepguard-xception

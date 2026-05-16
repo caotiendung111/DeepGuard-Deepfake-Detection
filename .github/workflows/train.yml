@@ -1,0 +1,53 @@
+name: Scheduled Training Pipeline
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Run every Sunday at midnight
+  workflow_dispatch:      # Allow manual trigger when new data arrives
+
+jobs:
+  train_and_evaluate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Setup DVC
+      uses: iterative/setup-dvc@v1
+      
+    - name: Pull Data from DVC
+      env:
+        GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+      run: |
+        dvc pull -f
+
+    - name: Run Training
+      run: |
+        make train
+        
+    - name: Run Evaluation
+      run: |
+        make eval
+        
+    - name: Compare AUC and Commit
+      run: |
+        # In a real scenario, you'd parse the evaluation report to get the new AUC
+        # and compare it against the baseline AUC stored in a metadata file.
+        # If new_auc > baseline_auc:
+        #   git config --global user.name 'github-actions'
+        #   git config --global user.email 'github-actions@github.com'
+        #   git add models/checkpoints/best_model.pth dvc.lock
+        #   git commit -m "Auto-update best model with improved AUC"
+        #   git push
+        #   dvc push
+        echo "Training and evaluation completed. Model is ready for comparison."
