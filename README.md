@@ -1,13 +1,12 @@
 # DeepGuard 🛡️
 **AI-Powered Deepfake Detection for Images and Videos**
 
-![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
-![AUC](https://img.shields.io/badge/AUC_ROC-0.985-brightgreen.svg)
-![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-2088FF.svg)
-![DVC](https://img.shields.io/badge/Data_Versioning-DVC-945DD6.svg)
+[![GitHub Actions CI](https://img.shields.io/github/actions/workflow/status/caotiendung111/DeepGuard-Deepfake-Detection/ci.yml?branch=main&logo=github&style=flat-square)](https://github.com/caotiendung111/DeepGuard-Deepfake-Detection/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Python Version](https://img.shields.io/badge/Python-3.10%20%7C%203.11-blue?logo=python&style=flat-square)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c.svg?logo=pytorch&style=flat-square)](https://pytorch.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688.svg?logo=fastapi&style=flat-square)](https://fastapi.tiangolo.com/)
+[![DVC](https://img.shields.io/badge/Data_Versioning-DVC-945DD6.svg?logo=data-version-control&style=flat-square)](https://dvc.org/)
 
 ![DeepGuard Dashboard Preview](dashboard.png)
 
@@ -17,23 +16,17 @@ By leveraging EfficientNet architectures and state-of-the-art Explainable AI (XA
 
 ## 🏗️ System Architecture
 
-```text
-[Input Image/Video] 
-        │
-        ▼
-┌───────────────┐     ┌───────────────────────┐     ┌────────────────────────┐
-│ Preprocessing │ ──► │  Deep Learning Model  │ ──► │ Explainable AI (XAI)   │
-│ - MTCNN Face  │     │ - EfficientNet-B4     │     │ - Captum LayerGradCam  │
-│   Detection   │     │ - Focal Loss          │     │ - Generates Heatmaps   │
-│ - 20% Padding │     │ - Mixed Precision     │     └───────────┬────────────┘
-│ - Normalize   │     └───────────────────────┘                 │
-└───────────────┘                                               ▼
-                                                    ┌────────────────────────┐
-                                                    │ Output & Serving       │
-                                                    │ - REAL / FAKE Label    │
-                                                    │ - Confidence Score     │
-                                                    │ - FastAPI / Streamlit  │
-                                                    └────────────────────────┘
+The following diagram illustrates the workflow of the DeepGuard detection pipeline, showing the relationship between media preprocessing, face detection, neural net inference, Grad-CAM generation, and the serving interfaces:
+
+```mermaid
+graph TD
+    Input[Upload Video / Image] --> UI[Streamlit / Gradio UI or FastAPI Endpoint]
+    UI --> Prep[Frame Extraction & Preprocessing]
+    Prep --> MTCNN[Face Detection & Cropping - MTCNN]
+    MTCNN --> Model[Deep Learning Inference - EfficientNet / Xception]
+    Model --> Post[Post-processing & Softmax Activation]
+    Post --> Output[Real/Fake Probability & Grad-CAM Heatmaps]
+    Output --> UI
 ```
 
 ## 📊 Performance Benchmarks
@@ -244,6 +237,24 @@ DeepGuard/
     ├── training/         # Custom Trainer loop, Losses, Metrics
     └── utils/            # Configurations, Logging, Visualization
 ```
+
+---
+
+## 📈 Known Limitations & Future Improvements
+
+To guide development and document algorithmic foresight, we outline the primary technical limitations of DeepGuard and the roadmap for scaling to production:
+
+- **Lack of Sequential Temporal Modeling (Frame-by-Frame Processing)**:
+  DeepGuard treats video classification as a spatial problem, analyzing frames independently and averaging scores. It cannot capture sequential abnormalities like mouth-to-audio sync errors, sub-frame flickering, or pixel jitter across time. 
+  *Improvement Roadmap*: Integrate a hybrid spatial-temporal model by adding a **Video Transformer** (e.g., Vivit) or feeding the frame embedding sequence into a recurrent structure (e.g., **Bi-LSTM** or **GRU**).
+- **Domain Generalization & Dataset Bias**:
+  Models trained primarily on FaceForensics++ and Celeb-DF exhibit slight accuracy degradation when exposed to raw compression algorithms and compression codecs used on active social media sites (e.g., TikTok, Instagram, Facebook).
+  *Improvement Roadmap*: Enrich data preprocessing with adversarial augmentation filters, including variable H.264/H.265 compression artifacts, Gaussian noise, and dynamic lighting shifts.
+- **Inference Latency vs. Edge Deployment**:
+  The EfficientNet-B4 model has 17.5M parameters and requires substantial computational power to process full 1080p video streams at high FPS.
+  *Improvement Roadmap*: Compile and export PyTorch model checkpoints to **ONNX Runtime** format with FP16 mixed precision or utilize **TensorRT** quantization to deploy on low-power edge machines or browser clients.
+
+---
 
 ## 📚 Acknowledgements & Citations
 This project utilizes the following public datasets for training and evaluation. If you use this work for academic research, please cite the original authors:

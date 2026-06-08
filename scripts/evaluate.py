@@ -1,10 +1,10 @@
 """
 DeepGuard — Model Evaluation Script
 
-- Tính metrics (AUC, F1, PR, etc.)
-- Tìm optimal threshold (Youden's J)
-- Vẽ ROC, PR, Confusion Matrix
-- Xuất PDF report
+- Compute evaluation metrics (AUC, F1, Precision-Recall, etc.)
+- Find the optimal classification threshold (Youden's J statistic)
+- Plot ROC, Precision-Recall curves, and Confusion Matrices
+- Export a comprehensive PDF evaluation report
 
 Usage:
     python scripts/evaluate.py --checkpoint models/checkpoints/best_model.pth
